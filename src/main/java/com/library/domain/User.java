@@ -1,4 +1,4 @@
-package com.libra.domain;
+package com.library.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
