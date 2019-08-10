@@ -1,34 +1,36 @@
 package com.library.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
- @Entity // This tells Hibernate to make a table out of this class
+@Entity // This tells Hibernate to make a table out of this class
     public class User {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer id;
+        private Integer userId;
 
-        private String name;
+        private String username;
 
         private String email;
 
-     public Integer getId() {
-         return id;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Orders> orders;
+
+
+    public Integer getUserId() {
+         return userId;
      }
 
-     public void setId(Integer id) {
-         this.id = id;
+     public void setUserId(Integer userId) {
+         this.userId = userId;
      }
 
-     public String getName() {
-         return name;
+     public String getUsername() {
+         return username;
      }
 
-     public void setName(String name) {
-         this.name = name;
+     public void setUsername(String username) {
+         this.username = username;
      }
 
      public String getEmail() {
