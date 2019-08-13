@@ -5,7 +5,9 @@ package com.library.repository;
 
 import com.library.domain.User;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public interface UserRepo extends CrudRepository<User, Integer> {
+public interface UserRepo extends CrudRepository<User, Long> {
 
+    User findByUsername(String username);
 }
