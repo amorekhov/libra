@@ -1,21 +1,34 @@
 package com.library.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
+import static org.springframework.boot.devtools.restart.AgentReloader.isActive;
+
 @Entity // This tells Hibernate to make a table out of this class
-    public class User {
+    public class User implements UserDetails {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Integer userId;
 
         private String username;
 
+        private String password;
+
+    private boolean active;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Orders> orders;
+
     public User() {
     }
 
-    public User(Integer userId, String username, String password) {
-        this.userId = userId;
+    public User( String username, String password) {
+
         this.username = username;
         this.password = password;
     }
@@ -32,8 +45,33 @@ import java.util.List;
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isActive();
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
@@ -44,12 +82,12 @@ import java.util.List;
         this.password = password;
     }
 
-    private String password;
+    public boolean isActive() {
+        return active;
+    }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Orders> orders;
-
-
-
- }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+}
 
