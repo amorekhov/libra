@@ -10,15 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/temp/pagination.css" >
-    <style>
-    *{margin:0px; padding:0px;}
-        body{ background:url(../background1.png); font-family: Helvetica, sans-serif; }
-    h1 {  font-family: Helvetica, Arial, sans-serif;  text-align: center;
-	  text-shadow: 2px 2px 0px rgba(255,255,255,.7), 5px 7px 0px rgba(0, 0, 0, 0.1);  font-size:50px; margin-top:60px; color:#fff;
-}
-#wrapper{ border: 5px solid rgba(255,255,255,0.6);  padding: 10px;  width:60%;  margin:60px auto; }
-.contents div{text-align:center; color:#123; font-size:20px; margin:20px auto}
-</style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/temp/pagination.js"></script>
     <script>
@@ -42,23 +34,37 @@ $(document).ready(function()
 
 <div class="container mt-5" >
     <h5>Welcom in library!</h5>
+
+
+
+        <th> name</th>
+        <th> author</th>
+        <th> description</th>
+
+
     <div id="wrapper">
         <div class="contents">
 
-    <#list book as book>
-        <div>
 
-    ${book.name}
-        ${book.author}
-        ${book.description}
+
+
+    <#list book as book>
+
+        <div >
+
+            <tr> ${book.name}</tr>
+             <tr> ${book.author}</tr>
+             <tr> ${book.description}</tr>
 
         </div>
 
             <#else>
     No messages
 </#list>
+
     </div>
 </div>
+
 </div>
 
 </body>
