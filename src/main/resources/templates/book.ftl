@@ -37,10 +37,6 @@ $(document).ready(function()
 
 
 
-        <th> name</th>
-        <th> author</th>
-        <th> description</th>
-
 
     <div id="wrapper">
         <div class="contents">
@@ -52,9 +48,13 @@ $(document).ready(function()
 
         <div >
 
-            <tr> ${book.name}</tr>
-             <tr> ${book.author}</tr>
-             <tr> ${book.description}</tr>
+            <b> <td STYLE="width = 120px">Name:  ${book.name}   </td></b>
+            <i> <td STYLE="width = 120px">Author:   ${book.author}   </td></i>
+            <td>Description:  ${book.description}   </td>
+
+           <TD> <input type="submit" value="Взять"/></TD>
+            <TD><input type="submit" value="Изменить"/></TD>
+            <TD><input type="submit" value="удалить"/></TD>
 
         </div>
 
