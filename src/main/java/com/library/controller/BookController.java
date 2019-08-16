@@ -1,14 +1,14 @@
 package com.library.controller;
 
 import com.library.domain.Book;
+import com.library.domain.User;
 import com.library.repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TransferQueue;
 
 @Controller
 public class BookController {
@@ -49,10 +49,26 @@ public class BookController {
       return "redirect:/book";
   }
 
-    @GetMapping(path="/all")
-    public @ResponseBody
-    Iterable<Book> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return bookRepo.findAll();
-    }
+  @GetMapping("/book/take/{book}")
+  public String take(
+          @PathVariable Book book,
+          Model model
+  ){
+      model.addAttribute("name", book.getName());
+      model.addAttribute("author", book.getAuthor());
+      model.addAttribute("description", book.getDescription());
+      return "redirect:/bookedit";
+  }
+
+  @PostMapping("/book/take/{book}")
+    public String takeBook(
+            Model model,
+            Book book,
+            User user
+  ){
+      return "redirect:/book";
+  }
+
+
+
 }

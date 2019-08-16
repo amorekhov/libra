@@ -52,9 +52,9 @@ $(document).ready(function()
             <i> <td STYLE="width = 120px">Author:   ${book.author}   </td></i>
             <td>Description:  ${book.description}   </td>
 
-           <TD> <input type="submit" value="Взять"/></TD>
-            <TD><input type="submit" value="Изменить"/></TD>
-            <TD><input type="submit" value="удалить"/></TD>
+            <TD> <a href="/book/take/${book.bookId}">Взять </TD>
+            <TD> <a href="/book/edit/${book.bookId}">Изменить </TD>
+            <TD> <a href="/book/del/${book.bookId}">удалить </TD>
 
         </div>
 
