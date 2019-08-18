@@ -31,6 +31,7 @@ $(document).ready(function()
 <a href="/bookadd">Добавить книгу</a>
 <a href="/">Библиотека</a>
 
+<a href="/book/sortnameasc">Sort</a>
 
 <div class="container mt-5" >
     <h5>Welcom in library!</h5>
@@ -48,13 +49,14 @@ $(document).ready(function()
 
         <div >
 
-            <b> <td STYLE="width = 120px">Name:  ${book.name}   </td></b>
-            <i> <td STYLE="width = 120px">Author:   ${book.author}   </td></i>
+            <b> <td >Name:  ${book.name}   </td></b>
+            <i> <td >Author:   ${book.author}   </td></i>
             <td>Description:  ${book.description}   </td>
 
-            <TD> <a href="/book/take/${book.bookId}">Взять </TD>
-            <TD> <a href="/book/edit/${book.bookId}">Изменить </TD>
-            <TD> <a href="/book/del/${book.bookId}">удалить </TD>
+            <td> <a class="btn btn-primary" href="/book/take/${book.bookId}">Взять </a></td>
+            <td> <a class="btn btn-primary" href="/book/edit/${book.bookId}">Изменить </a></td>
+            <td> <a class="btn btn-primary" href="/book/del/${book.bookId}">удалить</a></td>
+
 
         </div>
 

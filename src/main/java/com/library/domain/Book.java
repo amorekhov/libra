@@ -7,7 +7,7 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer bookId;
+    private Long bookId;
     private String name;
     private String author;
     private String description;
@@ -28,15 +28,15 @@ public class Book {
         this.description = description;
     }
 
-    public Integer getBookId() {
+    public Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(Integer bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
-    public String getName() {
+    public String getName(  ) {
         return name;
     }
 
@@ -67,4 +67,5 @@ public class Book {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+
 }

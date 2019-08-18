@@ -1,18 +1,18 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<#list book as book>
+
 <div>
 
-    <form  method="post" action="/bookadd">
+    <form  method="post" action="/bookedit">
         <div>
-            <input type="text" name="name"  value="${book.name}"/>
+            <input type="text" name="name"  value="${name}"/>
         </div>
         <div>
-            <input type="text" name = "author" value="${book.author}"/>
+            <input type="text" name = "author" value="${author}"/>
         </div>
         <div>
-            <input type="text"  name="description"  />
+            <input type="text"  name="description"  value="${description}" />
         </div>
 
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
@@ -21,8 +21,5 @@
         <button type="submit">Submit</button>
     </form>
 </div>
-<#else>
-
-</#list>
 
 </@c.page>

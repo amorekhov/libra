@@ -13,7 +13,10 @@
         <div>
             <input type="text"  name="description"  />
         </div>
-
+  <!--      <div>
+            <input type="text"  name="countAll"  />
+        </div>
+-->
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
 
