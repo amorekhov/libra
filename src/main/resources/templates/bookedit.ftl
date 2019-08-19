@@ -4,7 +4,7 @@
 
 <div>
 
-    <form  method="post" action="/bookedit">
+    <form  method="post" >
         <div>
             <input type="text" name="name"  value="${name}"/>
         </div>

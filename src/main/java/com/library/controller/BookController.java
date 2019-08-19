@@ -5,7 +5,6 @@ import com.library.domain.Orders;
 import com.library.domain.User;
 import com.library.repository.BookRepo;
 import com.library.repository.OrdersRepo;
-import com.library.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.concurrent.TransferQueue;
+import java.util.Optional;
 
 @Controller
 public class BookController {
@@ -91,6 +89,7 @@ public class BookController {
           @PathVariable Book book,
           Model model
   ){
+      model.addAttribute("id", book.getBookId());
       model.addAttribute("name", book.getName());
       model.addAttribute("author", book.getAuthor());
       model.addAttribute("description", book.getDescription());
@@ -99,17 +98,28 @@ public class BookController {
 
   @PostMapping("/book/edit/{book}")
     public String editBook(
-            Model model,
-            Book book,
-            User user
+            @RequestParam String name,
+            @RequestParam String author,
+            @RequestParam String description,
+            @PathVariable Book book
+
   ){
+     // Optional<Book> books = bookRepo.findById(book.getBookId());
+      book.setBookId(book.getBookId());
+      book.setName(name);
+      book.setAuthor(author);
+      book.setDescription(description);
+
+      bookRepo.save(book);
+
+
       return "redirect:/book";
   }
 
     @GetMapping("/book/sortnameasc")
     public String sortNameAsc(){
       Book book =  new Book();
-      bookRepo.findByName(book.getName(), Sort.unsorted().ascending());
+   //   bookRepo.findByName(book.getName(), Sort.unsorted().ascending());
      bookRepo.save(book);
       return "redirect:/book";
     }

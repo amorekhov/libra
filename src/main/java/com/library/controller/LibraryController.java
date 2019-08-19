@@ -12,7 +12,7 @@ public class LibraryController {
     private UserRepo userRepository;
 
     @GetMapping("/")
-    public String libra(Model model){
+    public String libra(){
         return "libra";
 
     }

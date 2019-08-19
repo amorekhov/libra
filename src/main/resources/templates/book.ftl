@@ -27,10 +27,11 @@ $(document).ready(function()
 </script>
 
 </head>
-<body>
+<div>
+<div class="container mt-5" >
 <a href="/bookadd">Добавить книгу</a>
 <a href="/">Библиотека</a>
-
+<a href="/orders">Take book</a>
 <a href="/book/sortnameasc">Sort</a>
 
 <div class="container mt-5" >
@@ -68,7 +69,7 @@ $(document).ready(function()
 </div>
 
 </div>
-
+</div>
 </body>
 </html>
 

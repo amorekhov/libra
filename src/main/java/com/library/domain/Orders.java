@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer ordersId;
+    private Long ordersId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId")
@@ -21,16 +21,16 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Integer id, Book book) {
+    public Orders(Long id, Book book) {
         this.ordersId = id;
         this.book = book;
     }
 
-    public Integer getOrdersId() {
+    public Long getOrdersId() {
         return ordersId;
     }
 
-    public void setOrdersId(Integer ordersId) {
+    public void setOrdersId(Long ordersId) {
         this.ordersId = ordersId;
     }
 
