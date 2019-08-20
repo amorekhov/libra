@@ -1,17 +1,20 @@
 <#import "parts/common.ftl" as c>
-
+<#import "parts/login.ftl" as l>
 
 <@c.page>
-   <a href="/book">книги</a>
+<div>
+    <@l.logout />
+</div>
+   <a class="btn btn-primary" href="/book">книги</a>
 <#list orders as orders>
     <div class="table">
-    ${orders.ordersId}
-    ${orders.book.name}
-    ${orders.user.username}
-   <a class="btn btn-primary" href="/orders/del/${orders.ordersId}">вернуть</a>
+
+        Name:  <b>${orders.book.name}</b>
+        User:   <b>   ${orders.user.username}</b>
+        <a class="btn btn-primary" href="/orders/del/${orders.ordersId}">вернуть</a>
     </div>
         <#else>
-No messages
+No orders
 </#list>
 
 </@c.page>

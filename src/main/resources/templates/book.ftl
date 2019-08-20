@@ -1,3 +1,4 @@
+<#import "parts/login.ftl" as l>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,11 +30,22 @@ $(document).ready(function()
 </head>
 <div>
 <div class="container mt-5" >
-<a href="/bookadd">Добавить книгу</a>
-<a href="/">Библиотека</a>
-<a href="/orders">Take book</a>
-<a href="/book/sortnameasc">Sort</a>
+    <div>
+        <@l.logout />
+    </div>
+    <div>
+<a class="btn btn-primary" href="/bookadd">Добавить книгу</a>
+<a class="btn btn-primary" href="/">Библиотека</a>
+<a class="btn btn-primary" href="/orders">Take book</a>
 
+</div>
+    <div>
+    <a class="btn btn-primary" href="/book/sortnameasc">Sort name asc</a>
+        <a class="btn btn-primary" href="/book/sortnamedesc">Sort name desk</a>
+        <a class="btn btn-primary" href="/book/sortauthorasc">Sort author asc</a>
+        <a class="btn btn-primary" href="/book/sortauthordesc">Sort author desc</a>
+
+    </div>
 <div class="container mt-5" >
     <h5>Welcom in library!</h5>
 
@@ -62,7 +74,7 @@ $(document).ready(function()
         </div>
 
             <#else>
-    No messages
+    No book
 </#list>
 
     </div>

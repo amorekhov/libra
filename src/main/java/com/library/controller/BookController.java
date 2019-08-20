@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @Controller
 public class BookController {
@@ -27,9 +27,7 @@ public class BookController {
 
       Iterable<Book> books = bookRepo.findAll();
 
-    /*  Boolean isTrue = book.getCount()==book.getCountAll();
-      model.addAttribute("isTrue", isTrue);
-    */
+
       model.addAttribute("book", books);
 
 
@@ -117,11 +115,55 @@ public class BookController {
   }
 
     @GetMapping("/book/sortnameasc")
-    public String sortNameAsc(){
-      Book book =  new Book();
-   //   bookRepo.findByName(book.getName(), Sort.unsorted().ascending());
-     bookRepo.save(book);
-      return "redirect:/book";
+    public String sortNameAsc(Model model){
+        Iterable<Book> books = bookRepo.findAll(Sort.by("name").ascending());
+
+
+
+        model.addAttribute("book", books);
+
+
+        return "book";
+    }
+    @GetMapping("/book/sortnamedesc")
+    public String sortNameDesc(Model model){
+        Iterable<Book> books = bookRepo.findAll(Sort.by("name").descending());
+
+
+
+        model.addAttribute("book", books);
+
+
+        return "book";
+    }
+    @GetMapping("/book/sortauthorasc")
+    public String sortAuthorAsc(Model model){
+        Iterable<Book> books = bookRepo.findAll(Sort.by("author").ascending());
+
+
+
+        model.addAttribute("book", books);
+
+
+        return "book";
+    }
+    @GetMapping("/book/sortauthordesc")
+    public String sortAuthorDesk(Model model){
+        Iterable<Book> books = bookRepo.findAll(Sort.by("author").descending());
+
+
+
+        model.addAttribute("book", books);
+
+
+        return "book";
+    }
+
+    @GetMapping(path="/all")
+    public @ResponseBody
+    List<Book> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return bookRepo.findAll(Sort.by("name").descending());
     }
 
 }
