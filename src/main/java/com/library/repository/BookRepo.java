@@ -9,5 +9,4 @@ import java.util.Optional;
 
 public interface BookRepo extends JpaRepository <Book, Long>  {
 
-    List<Book> findByNameOrderByNameAsc(String name);
 }

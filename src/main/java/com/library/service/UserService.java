@@ -22,9 +22,9 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
-    public void saveUser(User user){
+    public void addUser(User user){
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
-        saveUser(user);
+        userRepo.save(user);
     }
 }

@@ -24,8 +24,7 @@ public class BookController {
 
 
   @GetMapping("/book")
-    public String book(Model model){
-      model.addAttribute("book", bookService.booksFindAll());
+    public String book(Model model){model.addAttribute("book", bookService.booksFindAll());
       return "book";
   }
 
@@ -35,11 +34,8 @@ public class BookController {
   }
 
   @PostMapping("/bookadd")
-    public String bookAdd(
-            @RequestParam String name,
-            @RequestParam String author,
-            @RequestParam String description
-  ){
+    public String bookAdd(@RequestParam String name,@RequestParam String author,
+                          @RequestParam String description){
       bookService.bookAdd(name,author,description);
       return "redirect:/book";
   }
@@ -51,14 +47,11 @@ public class BookController {
     }
     @GetMapping("/book/del/{book}")
     public String bookDel(@PathVariable Book book){
-        bookService.delBook(book);
-        return "redirect:/book";
+      bookService.delBook(book);
+      return "redirect:/book";
     }
   @GetMapping("/book/edit/{book}")
-  public String bookEditView(
-          @PathVariable Book book,
-          Model model
-  ){
+  public String bookEditView(@PathVariable Book book, Model model ){
       model.addAttribute("id", book.getBookId());
       model.addAttribute("name", book.getName());
       model.addAttribute("author", book.getAuthor());
@@ -67,12 +60,8 @@ public class BookController {
   }
 
   @PostMapping("/book/edit/{book}")
-    public String editBook(
-            @RequestParam String name,
-            @RequestParam String author,
-            @RequestParam String description,
-            @PathVariable Book book
-  ){
+    public String editBook(@RequestParam String name, @RequestParam String author,
+            @RequestParam String description, @PathVariable Book book){
       bookService.bookUpdate(book,name,author,description);
       return "redirect:/book";
   }
