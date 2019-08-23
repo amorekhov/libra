@@ -3,6 +3,7 @@ package com.library.controller;
 import com.library.domain.Role;
 import com.library.domain.User;
 import com.library.repository.UserRepo;
+import com.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import java.util.Collections;
 @Controller
 public class UserController {
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
 
     @GetMapping("/login")
     public String login(){
@@ -28,25 +29,10 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model) {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
-
-        if (userFromDb != null) {
-            model.addAttribute("message", "User exists!");
-            return "registration";
-        }
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.ADMIN));
-        userRepo.save(user);
+    public String addUser(User user) {
+        userService.saveUser(user);
 
         return "redirect:/login";
-    }
-
-    @GetMapping(path="/user/all")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return userRepo.findAll();
     }
 
 

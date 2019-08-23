@@ -1,12 +1,9 @@
 package com.library.controller;
 
-import com.library.domain.Book;
 import com.library.domain.Orders;
 import com.library.repository.BookRepo;
 import com.library.repository.OrdersRepo;
-import com.library.repository.UserRepo;
-import com.library.service.UserService;
-import jdk.nashorn.internal.objects.annotations.Getter;
+import com.library.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,19 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class OrdersController {
+
     @Autowired
-    private OrdersRepo ordersRepo;
-    @Autowired
-    private BookRepo bookRepo;
-    @Autowired
-    private UserService userService;
+    private OrdersService ordersService;
 
     @GetMapping("/orders")
     public String ordersView(Model model){
 
-        Iterable<Orders> orders = ordersRepo.findAll();
-
-        model.addAttribute("orders", orders);
+        model.addAttribute("orders", ordersService.ordersFindAll());
         return "/orders";
     }
 
@@ -39,7 +31,7 @@ public class OrdersController {
 
     @GetMapping("/orders/del/{orders}")
     public String ordersDel(@PathVariable Orders orders){
-        ordersRepo.delete(orders);
+        ordersService.delOrders(orders);
         return "redirect:/orders";
     }
 }

@@ -3,43 +3,34 @@ package com.library.controller;
 import com.library.domain.Book;
 import com.library.domain.Orders;
 import com.library.domain.User;
-import com.library.repository.BookRepo;
-import com.library.repository.OrdersRepo;
+import com.library.service.BookService;
+import com.library.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookController {
     @Autowired
-    private BookRepo bookRepo;
+    private BookService bookService;
     @Autowired
-    private OrdersRepo ordersRepo;
+    private OrdersService ordersService;
 
 
   @GetMapping("/book")
-    public String book(Model model, Book book){
-
-      Iterable<Book> books = bookRepo.findAll();
-
-
-      model.addAttribute("book", books);
-
-
-
-
+    public String book(Model model){
+      model.addAttribute("book", bookService.booksFindAll());
       return "book";
   }
 
   @GetMapping("/bookadd")
     public String bookAddView() {
-      Book book = new Book();
-
       return "bookadd";
   }
 
@@ -47,41 +38,22 @@ public class BookController {
     public String bookAdd(
             @RequestParam String name,
             @RequestParam String author,
-            @RequestParam String description,
-           // @RequestParam Integer countAll,
-            Model model
+            @RequestParam String description
   ){
-
-
-      Book book =new Book(name,author,description);
-
-    //  book.setAvailability(true);
-
-      bookRepo.save(book);
-
+      bookService.bookAdd(name,author,description);
       return "redirect:/book";
   }
 
     @GetMapping("/book/take/{book}")
-    public String takeBookView(@PathVariable Book book, @AuthenticationPrincipal User user, Model model){
-
-        Orders orders = new Orders();
-        orders.setBook(book);
-        orders.setUser(user);
-        ordersRepo.save(orders);
-
-
+    public String takeBookView(@PathVariable Book book, @AuthenticationPrincipal User user){
+            ordersService.takeOrders(book,user);
         return "redirect:/book";
     }
-
     @GetMapping("/book/del/{book}")
     public String bookDel(@PathVariable Book book){
-        bookRepo.delete(book);
+        bookService.delBook(book);
         return "redirect:/book";
     }
-
-
-
   @GetMapping("/book/edit/{book}")
   public String bookEditView(
           @PathVariable Book book,
@@ -100,70 +72,28 @@ public class BookController {
             @RequestParam String author,
             @RequestParam String description,
             @PathVariable Book book
-
   ){
-     // Optional<Book> books = bookRepo.findById(book.getBookId());
-      book.setBookId(book.getBookId());
-      book.setName(name);
-      book.setAuthor(author);
-      book.setDescription(description);
-
-      bookRepo.save(book);
-
-
+      bookService.bookUpdate(book,name,author,description);
       return "redirect:/book";
   }
-
     @GetMapping("/book/sortnameasc")
     public String sortNameAsc(Model model){
-        Iterable<Book> books = bookRepo.findAll(Sort.by("name").ascending());
-
-
-
-        model.addAttribute("book", books);
-
-
+        model.addAttribute("book", bookService.booksSort(Sort.by("name").ascending()));
         return "book";
     }
     @GetMapping("/book/sortnamedesc")
     public String sortNameDesc(Model model){
-        Iterable<Book> books = bookRepo.findAll(Sort.by("name").descending());
-
-
-
-        model.addAttribute("book", books);
-
-
+        model.addAttribute("book", bookService.booksSort(Sort.by("name").descending()));
         return "book";
     }
     @GetMapping("/book/sortauthorasc")
     public String sortAuthorAsc(Model model){
-        Iterable<Book> books = bookRepo.findAll(Sort.by("author").ascending());
-
-
-
-        model.addAttribute("book", books);
-
-
+        model.addAttribute("book", bookService.booksSort(Sort.by("name").ascending()));
         return "book";
     }
     @GetMapping("/book/sortauthordesc")
     public String sortAuthorDesk(Model model){
-        Iterable<Book> books = bookRepo.findAll(Sort.by("author").descending());
-
-
-
-        model.addAttribute("book", books);
-
-
+        model.addAttribute("book", bookService.booksSort(Sort.by("author").descending()));
         return "book";
     }
-
-    @GetMapping(path="/all")
-    public @ResponseBody
-    List<Book> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return bookRepo.findAll(Sort.by("name").descending());
-    }
-
 }
