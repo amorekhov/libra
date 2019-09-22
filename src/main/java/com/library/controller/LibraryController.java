@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LibraryController {
 
     @GetMapping("/")
-    public String libra(){
+    public String libra() {
         return "libra";
 
     }

@@ -19,12 +19,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "/login";
     }
 
     @GetMapping("/registration")
-    public String registrationView(){
+    public String registrationView() {
         return "/registration";
     }
 
@@ -34,7 +34,6 @@ public class UserController {
 
         return "redirect:/login";
     }
-
 
 
 }

@@ -1,10 +1,8 @@
 package com.library.service;
 
 import com.library.domain.Book;
-import com.library.domain.Orders;
 import com.library.domain.User;
 import com.library.repository.BookRepo;
-import org.hibernate.criterion.Order;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BookServiceTest {
@@ -32,11 +29,11 @@ public class BookServiceTest {
 
     public final List<Book> books = new ArrayList<>();
     public final List<User> users = new ArrayList<>();
-    public final List<Orders> orders = new ArrayList<>();
+
 
     @Before
-    public void db(){
-        Book book=new Book();
+    public void db() {
+        Book book = new Book();
         book.setName("name");
         book.setAuthor("author");
         book.setDescription("description");
@@ -47,10 +44,6 @@ public class BookServiceTest {
         user.setPassword("password");
         users.add(user);
 
-        Orders order = new Orders();
-        order.setUser(user);
-        order.setBook(book);
-        orders.add(order);
     }
 
     @Test
@@ -83,11 +76,11 @@ public class BookServiceTest {
     @Test
     public void bookUpdate() {
         Book book = new Book();
-        String name=books.get(0).getName();
-        String author=books.get(0).getAuthor();
-        String description=books.get(0).getDescription();
+        String name = books.get(0).getName();
+        String author = books.get(0).getAuthor();
+        String description = books.get(0).getDescription();
 
-        bookService.bookUpdate(book,name,author,description);
+        bookService.bookUpdate(book, name, author, description);
 
         Assert.assertEquals(book.getName(), books.get(0).getName());
         Assert.assertEquals(book.getAuthor(), books.get(0).getAuthor());
@@ -100,10 +93,10 @@ public class BookServiceTest {
     @Test
     public void bookAdd() {
         Book book = new Book();
-        String name=books.get(0).getName();
-        String author=books.get(0).getAuthor();
-        String description=books.get(0).getDescription();
-        bookService.bookAdd(name,author,description);
+        String name = books.get(0).getName();
+        String author = books.get(0).getAuthor();
+        String description = books.get(0).getDescription();
+        bookService.bookAdd(name, author, description);
 
         Mockito.verify(bookRepo, Mockito.times(1)).save(ArgumentMatchers.any(Book.class));
     }

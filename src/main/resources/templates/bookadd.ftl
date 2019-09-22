@@ -5,21 +5,21 @@
     <@l.logout />
 </div>
 <div>
-    <form  method="post" action="/bookadd">
+    <form method="post" action="/bookadd">
         Name:
         <div>
-          <input type="text" name="name"  />
+            <input type="text" name="name"/>
         </div>
         Author:
         <div>
-            <input type="text" name = "author" />
+            <input type="text" name="author"/>
         </div>
         Description:
         <div>
-          <input type="text"  name="description"  />
+            <input type="text" name="description"/>
         </div>
 
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
 
         <button type="submit">Submit</button>

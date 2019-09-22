@@ -13,9 +13,9 @@ public class Book {
     private String description;
     private Boolean availability;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Orders> orders;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
 
     public Book() {
 
@@ -36,7 +36,7 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public String getName(  ) {
+    public String getName() {
         return name;
     }
 
@@ -68,4 +68,11 @@ public class Book {
         this.availability = availability;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

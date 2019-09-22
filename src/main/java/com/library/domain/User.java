@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
-    public class User implements UserDetails {
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer userId;
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer userId;
 
-        private String username;
+    private String username;
 
-        private String password;
+    private String password;
 
     private boolean active;
 
@@ -27,12 +27,12 @@ import java.util.Set;
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Orders> orders;
+    private List<Book> books;
 
     public User() {
     }
 
-    public User( String username, String password) {
+    public User(String username, String password) {
 
         this.username = username;
         this.password = password;
@@ -104,13 +104,12 @@ import java.util.Set;
         this.roles = roles;
     }
 
-    public List<Orders> getOrders() {
-        return orders;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setOrders(List<Orders> orders) {
-        this.orders = orders;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
-
 }
 

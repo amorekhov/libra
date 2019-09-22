@@ -28,7 +28,7 @@ public class UserServiceTest {
     private UserRepo userRepo;
 
     @Test
-   public void loadUserByUsername() {
+    public void loadUserByUsername() {
         User user = new User();
         userService.loadUserByUsername(user.getUsername());
         Mockito.verify(userRepo, Mockito.times(1)).findByUsername(user.getUsername());

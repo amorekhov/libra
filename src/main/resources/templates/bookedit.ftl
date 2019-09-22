@@ -6,18 +6,18 @@
 </div>
 <div>
 
-    <form  method="post" >
+    <form method="post">
         <div>
-            <input type="text" name="name"  value="${name}"/>
+            <input type="text" name="name" value="${name}"/>
         </div>
         <div>
-            <input type="text" name = "author" value="${author}"/>
+            <input type="text" name="author" value="${author}"/>
         </div>
         <div>
-            <input type="text"  name="description"  value="${description}" />
+            <input type="text" name="description" value="${description}"/>
         </div>
 
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
 
         <button type="submit">Submit</button>
