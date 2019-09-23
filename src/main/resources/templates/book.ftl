@@ -77,11 +77,8 @@ $(document).ready(function()
                             </a>
                         <td><a class="btn btn-primary" href="/book/del/${book.bookId}">удалить</a></td>
                         <#elseif isCurrent =="${book.user.username}">
-                        <a class="btn btn-primary" href="/book/deltake/${book.bookId}"> Вернуть
-                        </a>
-
-                    </
-                    #if>
+                        <a class="btn btn-primary" href="/book/deltake/${book.bookId}"> Вернуть </a>
+                        </#if>
                     </td>
                     <td><a class="btn btn-primary" href="/book/edit/${book.bookId}">Изменить </a></td>
 
@@ -90,8 +87,7 @@ $(document).ready(function()
 
                 <#else>
                 No book
-            </
-            #list>
+            </#list>
 
         </div>
     </div>
