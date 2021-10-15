@@ -1,7 +1,6 @@
 package com.library.domain;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Book {
@@ -18,9 +17,7 @@ public class Book {
     private User user;
 
     public Book() {
-
     }
-
 
     public Book(String name, String author, String description) {
         this.name = name;

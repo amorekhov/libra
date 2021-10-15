@@ -2,7 +2,6 @@ package com.library.config;
 
 import com.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,35 +15,40 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
     private DataSource dataSource;
-
-    @Autowired
     private UserService userSevice;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                    .authorizeRequests()
-                    .antMatchers("/", "/registration").permitAll()
-                    .antMatchers("/admin/**").hasAnyRole("CUSTOM_ADMIN")
-                    .anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/**", "/registration", "/h2-console/**").permitAll()
+                .antMatchers("/admin/**", "/h2-console/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-                    .logout()
-                    .permitAll();
+                .logout()
+                .permitAll();
 
     }
-
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userSevice)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
+    }
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    @Autowired
+    public void setUserSevice(UserService userSevice) {
+        this.userSevice = userSevice;
     }
 }

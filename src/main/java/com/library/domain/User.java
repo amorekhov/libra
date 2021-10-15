@@ -25,7 +25,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Book> books;
 
@@ -33,7 +32,6 @@ public class User implements UserDetails {
     }
 
     public User(String username, String password) {
-
         this.username = username;
         this.password = password;
     }
@@ -94,7 +92,6 @@ public class User implements UserDetails {
     public void setActive(boolean active) {
         this.active = active;
     }
-
 
     public Set<Role> getRoles() {
         return roles;

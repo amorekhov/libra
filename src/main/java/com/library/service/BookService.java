@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookService {
-    @Autowired
     private BookRepo bookRepo;
-
 
     public Iterable<Book> booksFindAll() {
         return bookRepo.findAll();
@@ -55,4 +53,8 @@ public class BookService {
         saveBook(book);
     }
 
+    @Autowired
+    public void setBookRepo(BookRepo bookRepo) {
+        this.bookRepo = bookRepo;
+    }
 }

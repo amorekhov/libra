@@ -14,7 +14,6 @@ import java.util.Collections;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
     private UserRepo userRepo;
 
     @Override
@@ -27,4 +26,10 @@ public class UserService implements UserDetailsService {
         user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
     }
+
+    @Autowired
+    public void setUserRepo(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
 }

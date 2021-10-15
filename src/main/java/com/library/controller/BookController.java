@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookController {
-    @Autowired
     private BookService bookService;
-
 
     @GetMapping("/book")
     public String book(Model model) {
@@ -100,4 +98,10 @@ public class BookController {
         model.addAttribute("book", bookService.booksSort(Sort.by("author").descending()));
         return "book";
     }
+
+    @Autowired
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
+    }
+
 }
